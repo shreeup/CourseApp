@@ -59,16 +59,12 @@ app.use(function (req, res, next) {
   );
   next();
 });
-app.use(`${process.env.REACT_APP_NODEAPP_URL}/api/v1/auth`, authRouter);
-app.use(`${process.env.REACT_APP_NODEAPP_URL}/api/v1/jobs`, auth, jobsRouter);
-app.use(`${process.env.REACT_APP_NODEAPP_URL}/api/v1/trips`, auth, tripsRouter);
-app.use(`${process.env.REACT_APP_NODEAPP_URL}/api/v1/courses`, coursesRouter);
-app.use(
-  `${process.env.REACT_APP_NODEAPP_URL}/api/v1/`,
-  auth,
-  usercoursesRouter
-);
-app.use(`${process.env.REACT_APP_NODEAPP_URL}/api/v1/users`, auth, usersRouter);
+app.use(`/api/v1/auth`, authRouter);
+app.use(`/api/v1/jobs`, auth, jobsRouter);
+app.use(`/api/v1/trips`, auth, tripsRouter);
+app.use(`/api/v1/courses`, coursesRouter);
+app.use(`/api/v1/`, auth, usercoursesRouter);
+app.use(`/api/v1/users`, auth, usersRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
