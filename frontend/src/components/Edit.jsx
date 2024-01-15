@@ -23,7 +23,6 @@ function Edit() {
         setTitle(data.course.title);
         setPrice(data.course.price);
         setDescription(data.course.description);
-        console.log(data.course.published);
         setPublished(data.course.published);
       })
       .catch((error) => console.error(error));
@@ -55,9 +54,9 @@ function Edit() {
 
       .then((data) => {
         setTitle(data.course.title);
+        hist("/courses");
       })
       .catch((error) => console.error(error));
-    hist("/courses");
   };
   return (
     <div>

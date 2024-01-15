@@ -20,15 +20,16 @@ function App() {
       <Router>
         <AuthProvider>
           <Routes>
+            <Route path="/" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/register" element={<Register />} />{" "}
-            <Route path="/" element={<Dashboard />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/create" element={<Add />} />
             <Route path="/edit/:id" element={<Edit />} />
             <Route path="/users" element={<Users />} />
             <Route path="/useredit/:id" element={<UserEdit />} />
+            <Route path="*" element={<Dashboard />} />
           </Routes>
         </AuthProvider>
       </Router>
