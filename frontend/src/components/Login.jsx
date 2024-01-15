@@ -15,10 +15,13 @@ export default function Register() {
     e.preventDefault();
     // make a popup alert showing the "submitted" text
     try {
-      const response = await axios.post("/api/v1/auth/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_NODEAPP_URL}/api/v1/auth/login`,
+        {
+          email,
+          password,
+        }
+      );
       setToken(response.data.token);
       setUser(response.data.user.name);
       localStorage.setItem("ctdtoken", response.data.token);

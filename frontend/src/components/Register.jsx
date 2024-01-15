@@ -17,11 +17,14 @@ export default function Register() {
     e.preventDefault();
     // make a popup alert showing the "submitted" text
     try {
-      const response = await axios.post("/api/v1/auth/register", {
-        name,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_NODEAPP_URL}/api/v1/auth/register`,
+        {
+          name,
+          email,
+          password,
+        }
+      );
       setMessage(response.data.message);
       setToken(response.data.token);
       setUser(response.data.user.name);

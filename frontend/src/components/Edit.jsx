@@ -31,7 +31,6 @@ function Edit() {
   const handleSubmit = (e) => {
     e.preventDefault();
     //call edit
-    debugger;
     const requestOptions = {
       method: "POST",
       headers: {
