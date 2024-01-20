@@ -41,6 +41,11 @@ function Dashboard() {
       <h3>
         <Link to="/courses">Courses</Link>
       </h3>
+      <h3>
+        <Link to={`${process.env.REACT_APP_NODEAPP_URL}/api-docs`}>
+          API Docs
+        </Link>
+      </h3>
       <button onClick={handleLogout}>Logout</button>
     </div>
   );

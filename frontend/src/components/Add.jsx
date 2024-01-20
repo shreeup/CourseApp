@@ -32,9 +32,9 @@ function Add() {
       .then((response) => response.json())
       .then((data) => {
         alert("Course created successfully");
+        hist("/courses");
       })
       .catch((error) => console.error(error));
-    hist("/courses");
   };
   return (
     <div>

@@ -12,16 +12,14 @@ const rateLimiter = require("express-rate-limit");
 
 //swagger
 const swagger = require("swagger-ui-express");
-// const YAML = require("yamljs");
-// const swaggerDoc = YAML.load("./swagger.yaml");
+const YAML = require("yamljs");
+const swaggerDoc = YAML.load("./swagger.yaml");
 
 //connectdb
 const connectDB = require("./db/connect");
 const { auth, adminauth } = require("./middleware/authentication");
 //routers
 const authRouter = require("./routes/auth");
-const jobsRouter = require("./routes/jobs");
-const tripsRouter = require("./routes/trips");
 const coursesRouter = require("./routes/courses");
 const usercoursesRouter = require("./routes/usercourses");
 const usersRouter = require("./routes/users");
@@ -49,7 +47,7 @@ app.use(helmet());
 app.use(cors(corsOptions));
 
 app.use(express.static("public"));
-//app.use("/api-docs", swagger.serve, swagger.setup(swaggerDoc));
+app.use("/api-docs", swagger.serve, swagger.setup(swaggerDoc));
 // routes
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -60,8 +58,6 @@ app.use(function (req, res, next) {
   next();
 });
 app.use(`/api/v1/auth`, authRouter);
-app.use(`/api/v1/jobs`, auth, jobsRouter);
-app.use(`/api/v1/trips`, auth, tripsRouter);
 app.use(`/api/v1/courses`, coursesRouter);
 app.use(`/api/v1/`, auth, usercoursesRouter);
 app.use(`/api/v1/users`, auth, usersRouter);

@@ -1,0 +1,403 @@
+openapi: 3.0.0
+info:
+  title: CourseApp
+  contact: {}
+  version: "1.0"
+servers:
+  - url: https://courseapp-99x0.onrender.com/api/v1
+    variables: {}
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: login
+      operationId: login
+      parameters:
+        - name: username
+          in: header
+          description: ""
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: shreeuser
+        - name: password
+          in: header
+          description: ""
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: pw
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/loginrequest"
+                - example:
+                    name: shreeuser
+                    email: admin@yahoo.com
+                    password: password
+            example:
+              name: shreeuser
+              email: admin@yahoo.com
+              password: password
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: register
+      operationId: register
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/registerrequest"
+                - example:
+                    email: sdf@sdf.com
+                    name: tsemsdf
+                    password: password
+            example:
+              email: sdf@sdf.com
+              name: tsemsdf
+              password: password
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /users/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The user ID
+    get:
+      tags:
+        - User
+      summary: getuser
+      operationId: getuser
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    post:
+      tags:
+        - User
+      summary: edituser
+      operationId: edituser
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/edituserrequest"
+                - example:
+                    name: shreeuser
+                    email: abc@yahoo.com
+                    password: password
+                    isadmin: false
+            example:
+              name: shreeuser
+              email: abc@yahoo.com
+              password: password
+              isadmin: false
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - User
+      summary: deleteuser
+      operationId: deleteuser
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /courses/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The course ID
+    get:
+      tags:
+        - Course
+      summary: getcourse
+      operationId: getcourse
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+        - Course
+      summary: editcourse
+      operationId: editcourse
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/editcourserequest"
+                - example:
+                    title: title of course
+                    price: 123
+                    description: Description about course
+            example:
+              title: title of course
+              price: 123
+              description: Description about course
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - Course
+      summary: deletecourse
+      operationId: deletecourse
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /courses:
+    get:
+      tags:
+        - Course
+      summary: getallcourses
+      operationId: getallcourses
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    post:
+      tags:
+        - Course
+      summary: createcourse
+      operationId: createcourse
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/createcourserequest"
+                - example:
+                    title: title of course
+                    price: 123
+                    description: Description about course
+                    published: true
+            example:
+              title: title of course
+              price: 123
+              description: Description about course
+              published: true
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /purchase/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The course ID
+    post:
+      tags:
+        - Course
+      summary: purchasecourse
+      operationId: purchasecourse
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /purchasedcourses:
+    get:
+      tags:
+        - Course
+      summary: purchasedcourses
+      operationId: purchasedcourses
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+components:
+  schemas:
+    loginrequest:
+      title: loginrequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: shreeuser
+        email: admin@yahoo.com
+        password: password
+    registerrequest:
+      title: registerrequest
+      required:
+        - email
+        - name
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        name:
+          type: string
+        password:
+          type: string
+      example:
+        email: sdf@sdf.com
+        name: tsemsdf
+        password: password
+    edituserrequest:
+      title: edituserrequest
+      required:
+        - name
+        - email
+        - password
+        - isadmin
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        isadmin:
+          type: boolean
+      example:
+        name: shreeuser
+        email: abc@yahoo.com
+        password: password
+        isadmin: false
+    editcourserequest:
+      title: editcourserequest
+      required:
+        - title
+        - price
+        - description
+      type: object
+      properties:
+        title:
+          type: string
+        price:
+          type: integer
+          format: int32
+        description:
+          type: string
+      example:
+        title: title of course
+        price: 123
+        description: Description about course
+    createcourserequest:
+      title: createcourserequest
+      required:
+        - title
+        - price
+        - description
+        - published
+      type: object
+      properties:
+        title:
+          type: string
+        price:
+          type: integer
+          format: int32
+        description:
+          type: string
+        published:
+          type: boolean
+      example:
+        title: title of course
+        price: 123
+        description: Description about course
+        published: true
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: Auth
+    description: ""
+  - name: User
+    description: ""
+  - name: Course
+    description: ""
