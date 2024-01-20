@@ -1,11 +1,22 @@
 # CourseApp
 
 Authentication : JWT Token with LocalStorage
+
+
 Styling : React-bootstrap
+
+
 Hosted on Render: https://courseappfrontend.onrender.com/
+
+
 Database : MongoDB
+
+
 Backend : Node + Express
+
+
 Frontend : React
+
 
 Design
 
